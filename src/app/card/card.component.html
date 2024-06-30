@@ -1,0 +1,35 @@
+<div class="container">
+<h1>Cart</h1>
+<div>
+  <button routerLink="/home">Countinue buying</button>
+</div>
+
+<div *ngIf="cart.length > 0; else emptyCart">
+  <div *ngFor="let item of cart" class="product" [@slideFromBottomAnimation]>
+    <div class="product-data">
+    <div><strong>{{item.name}}</strong></div>
+    <div><strong>Quantity:</strong> {{ item.quantity }}</div>
+    <div><strong>Unit price:</strong> {{item.unitPrice}}$</div>
+    <div><strong>Price:</strong> {{item.quantity*item.unitPrice}}$</div>
+  </div>
+    <div class="cart-btns">
+    <button (click)="incrementQuantity(item.id)">+</button>
+    <button (click)="decrementQuantity(item.id)">-</button>
+    <button (click)="removeFromCart(item)">Remove</button>
+  </div>
+  </div>
+
+  <div class="total-container" >
+    <strong>Total: {{total}} $</strong>
+    <div class="total-container-btns">
+      <button (click)="navigateToFatura()">Buy</button>
+    <button (click)="clearCart()" routerLink="home">Clear Cart</button>
+    </div>
+    
+  </div>
+</div>
+
+<ng-template #emptyCart>
+  <p>Your cart is empty.</p>
+</ng-template>
+</div>

@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    justify-content: center;
+    height: 90vh; 
+}
+
+.card{
+    width:60%;
+    margin:auto;
+    border-radius:40px;
+    padding:10px 20px
+}
+
+.card-body button{
+    border:none;
+    background-color: white;
+    float:right;
+    font-weight: bold;
+}
+
+.card-body{
+    text-align: center;
+}
+
+
+.pago{
+    color:purple;
+  
+}
+.anulo{
+    color:red;
+
+}

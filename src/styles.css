@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+/* @import '~swiper/swiper'; */
+
+body.dark-theme {
+  background-color: black;
+  color: #ffffff;
+}
+
+body.dark-theme .container {
+  background-color: black;
+  color: white;
+}
+
+body.dark-theme .home-header {
+  background-color: black;
+  color: white;
+}
+
+body.dark-theme .product-card {
+  border-bottom: 1px solid #444444;
+  background-color: black;
+  color: white;
+}
+
+body.dark-theme .product-info p {
+  color: white;
+}
+body.dark-theme .category-name,
+.category-count {
+  color: white;
+}
+body.dark-theme input[type="search"] {
+  background-color: #333333;
+  color: #ffffff;
+  border-bottom: 1px solid #444444;
+}
+
+body.dark-theme .home-header button,
+body.dark-theme .category-header button,
+body.dark-theme .pagination-controls button {
+  background-color: black;
+  color: white;
+}
+body.dark-theme .close {
+  background-color: white;
+}

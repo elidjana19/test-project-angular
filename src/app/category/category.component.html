@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="category-header">
+    <button class="back" routerLink="categories">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <h2>{{ categoryName }}</h2>
+    <button routerLink="/card">
+      <i class="bi bi-cart-fill">
+        <span>{{ getTotalQuantity() }}</span>
+      </i>
+    </button>
+  </div>
+
+  <div class="product-list">
+    <div *ngFor="let product of visibleProducts" class="product-card">
+      <div class="product-info">
+        <p class="name">{{ product.name }}</p>
+        <p>{{ product.unitPrice }} Leke</p>
+      </div>
+      <div class="product-controls">
+        <button class="decrease" (click)="removeFromCart(product)">-</button>
+        <button class="increase" (click)="addToCart(product)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 0">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <div id="pagination" class="pagination">
+      <span
+        *ngFor="let page of [].constructor(totalPages); let i = index"
+        class="dot"
+        [class.active]="currentPage === i"
+        (click)="goToPage(i)"
+      ></span>
+    </div>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">
+      <i class="bi bi-arrow-right"></i>
+    </button>
+  </div>
+</div>

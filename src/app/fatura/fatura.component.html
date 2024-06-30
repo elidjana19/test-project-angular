@@ -1,0 +1,18 @@
+<div class="container">
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h2 class="card-title">Fatura </h2>
+      <p class="card-text">{{total}} ALL</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let item of cart">
+        {{item.name}}
+      </li>
+      
+    </ul>
+    <div class="card-body">
+      <button class="pago" routerLink="/fatura-sukses">Paguaj</button>
+      <button class="anulo" (click)="cancel()">Anullo</button>
+    </div>
+  </div>
+</div>

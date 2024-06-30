@@ -1,0 +1,45 @@
+.container {
+  width: 100%;
+  height: auto;
+}
+.home-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+}
+.product-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  background-color: #fff;
+  border-left: none;
+  border-right: none;
+}
+.product-info {
+  display: flex;
+}
+
+.category-count {
+  margin-left: auto;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+input[type="search"] {
+  padding: 15px;
+  background-color: #ccc;
+  border: none;
+  border-bottom: 2px solid black;
+  width: 100%;
+}
+
+button {
+  border: none;
+  background-color: white;
+}

@@ -1,0 +1,28 @@
+<div class="container">
+<div class="home-header">
+  <button (click)="switchTheme()" id="theme" [ngClass]="themeIcon"></button>
+  <h1>Category name</h1>
+  <button routerLink="/card"><i class="bi bi-cart-fill"><span>{{getTotalQuantity()}}</span></i></button>
+</div>
+  <input
+    type="search"
+    placeholder="filter categories"
+    [(ngModel)]="searchString"
+    (ngModelChange)="filterCategories()"
+  />
+<div *ngIf="filteredCategories.length > 0; else noResults"></div>
+<ng-template #noResults>
+  <p>No categories found.</p>
+</ng-template>
+<ng-container *ngFor="let category of filteredCategories">
+  <div class="product-card">
+    <div class="product-info">
+      <a [routerLink]="['/category', category.id]" class="link"
+        ><span class="category-name">{{ category.name }}</span>
+    </a>
+        <span class="category-count">{{ category.products.length }} items</span>
+      
+    </div>
+  </div>
+</ng-container>
+</div>

@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+  }
+
+.card{
+    width:60%;
+    margin:auto;
+    border-radius:40px;
+    padding:10px 20px
+
+}
+
+button{
+    border:none;
+    color:purple;
+    background-color: white;
+    font-weight: bold;
+    float:right
+}

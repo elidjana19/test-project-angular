@@ -1,0 +1,113 @@
+Per te krijuar detyren e dhene ne angular une fillimisht krijova nje mock-data. 
+
+DataService
+Per te marre te dhenat nga ajo me duhet te krijoj nje service "dataService". Perdor service sepse metodat
+e nje servisi mund ti perdor neper komponente te ndyshme kur te me duhen pa dublikuar kod.
+Ne kete service kam krijuar 2 metoda, nje per te marre te dhenat, apo kategorite nga mock-data, ku Mock-data eshte nje vektor 
+me objekte ku cdo objekt perfaqeson nje kategori, 
+dhe nje metode per te marre nje kategori te caktuar bazuar tek id qe i kalohet si argument metodes.
+Per te marre te dhenat fillimisht me duhet te importoj HttpClientModule tek app.module.ts
+Tek service dataService injektoj HttpClient service tek constructori, i cili me lejon service tim
+te beje Http request per te marre te dhenat.
+te dyja metodat kthejne Observable prandaj per te marre te dhenat duhet tu bej subscribe.
+Observable perdoren per te menaxhuar data stream-et asikrone.
+
+CartService
+tek ky service une krijoj logjiken si shtohen, hiqen produktet nga kartat, si te marr cmimin total
+dhe te inkrementoj/dekrementoj sasine e nje produkti.
+addToCart(product): shoh nese ky produkt ekziston e card, nese po i inkrementoj sasine ne cart, perndryshe e shtoj kete produkt duke i
+vendosur edhe quantity:1.
+removeFromCart(product) edhe ketu shoh nese produkti ekziston ne cart nese po i dekrementoj sasine
+nese eshte vetem 1 produkt e filtroj nga cart.
+getCart() metode qe une marr produktet e nje karte, ku karta eshte nje array dhe produktet jane objekte
+
+Ne app-routing.ts vendos pathet 
+  {path:'home', component:HomeComponent},
+  {path:'card', component:CardComponent},
+  {path:'fatura', component:FaturaComponent},
+  {path:'fatura-sukses', component:FaturaSuksesComponent},
+  { path: 'category/:id', component: CategoryComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/home' } 
+Si path default sherben home, edhe nese vendoset nje path gabim une e drejtoj tek home.
+
+HomeComponent
+Tek home krijoj header qe mban button per theme, h2 dhe cart button.
+Ne klikim cart icon te con tek /card path.
+Ne klikim theme icon ben te mundur ndryshimin nga light ne dark mode
+sepse ne klikim ky buton therret metoden switchTheme().
+switchTheme kontrollon nese variabli darkTheme eshte true apo false nese eshte true si icon ne html do 
+shfaq diellin perndryshe henen. Dhe nese darkTheme true vendos ne body klasen e css .dark-theme
+nese jo e heq.
+Por problemi ishte nese kaloj nga nje faqe ne nje tjeter, dark-theme style qendronte por jo icona e duhur
+prandaj mu nevojit qe te ruaja gjendjen duke perdorur localStorage.
+
+Tek home une afishoj gjithe kategorite qe kam.
+injektoj dataService tek konstruktori i klases dhe krijoj meotden getCategories
+qe i ben subscribe te dhenave qe merrte service nga mock-data. Keto te dhena i vendos tek categories[].
+
+Nje funksionalitet tjeter qe duhet te krijoja eshte filtrimi i kategorive.
+Me duhet te marr inputin e vendosur tek search dhe te kontrolloj nese ky string permbahet brenda emrit te ndonje te kategorive
+nese po kete kategori e ruaj tek filteredCategories, qe ti mund ti afishoj ne html.
+Kam perdorur 2 way binding  [(ngModel)]="searchString"  qe merr vleren e vendosur tek searchi ia asenjon seachString dhe sa here 
+ndryshon vlera updatohet edhe searchString. Dhe (ngModelChange)="filterCategories()" kur ndodh nje ndryshim thirret metoda filterCategories() qe 
+e shpjegova edhe me lart. 
+
+Ne klikim te nje kategorie une duhet te shkoj tek nje tjeter view me path
+category/id prandaj perdoror [routerLink]="['/category', category.id]".
+
+CategoryComponent
+Pasi klikoj kategorine qe dua, une shkoj tek category component,e cila do me shfaqe
+elementet/produktet e kategorise se klikuar. 
+Prandaj per te marre kategorine ketu do perdor metoden getCategoryById te service.
+dhe id e marr nga route duke perdorur ActivatedRoute.
+Pasi marr kategorine ne baze te id, ruaj emrin e saj ne nje variable dhe produktet e saj ne nje vektor
+Per ti afishuar elementet ne html me duhet te krijoj nje slider i cili afishon 6 cards ne nje view.
+Prandaj ne ts kam krijuar 2 variabla si currentPage qe do mbaje faqen aktuale dhe pageSize =6
+qe tregon sa cards mund te mbaje nje view. Me get totalPages() llogaris nr total te faqeve dhe me 
+get VisibleProducts() bej te mundur qe vektori te mbaje 6 cards. dhe me *ngFor=let product of visibleProducts
+une i afishoj produktet. Nese nje kategori ka me shume se 6 produkte kur klikoj -> kaloj tek view tjeter qe mban
+6 cards e tjera. per dy butonat kam krijuar edhe emetodat nextPage() dhe previusPage() qe inkrementon ose dekrementon actualPage.
+Per secilin element vendos 2 butona +  dhe - per te shtuar dhe hequr elementet nga cart. Metodat i kam krijuar ne service.
+Gjithashtu krijova edhe medoten getTotalQuantity() e cila me kthen nr total
+te produkteve ne cart. Per secilin nga produktet qe kam ne karte llogaris sasine e tyre
+dhe kete rezulat e shfaq prane cart icon me span.
+
+CardComponent
+Krijoj nje vektor cart[] i cili perfaqeson karten dhe me getCart() marr elementet e kartes. qe jam produktet {name: , unitPrice:}
+Per ti afishuar produktet e kartes kam perdorur animacion. Filimisht kam importuar
+{BrowserAnimationsModule}
+Me pas kam krijuar animation.ts ku kam krijuar animacioinin me emer slideFromBottomAnimation
+ku trigger percakton emrin e animacionit dhe vendos disa transition per te.
+Kam percaktuar transition enter, pra animacioni ndodh kur elemente shfaqen dhe nga translateY(100%) elementi do shfaqet ne translateY(0%) per 500ms
+Kete animacion e importoj tek card.ts dhe per ta perdorur ne html [@slideFromBottomAnimation]
+Ne html kam krijuar cards per secilin element. te cilat do afishon nepermjet animacionit qe kam krijuar.
+Ne secilen card kam vendosur edhe butonat + dhe - ne menyre qe te inkremetoj/dekrementoj sasine ne shporte
+
+Tek shporta kam vendosur edhe butonat buy dhe clearCart
+clearCart() pastron cart duke e bere cart=[]
+ndersa buy me con tek /fatura
+
+Fatura
+Afishon produktet qe ndodhen ne shporte, i merr ato me getCart() dhe i afishon
+Nese klikoj pranoj shkoj /fatura-sukses
+nese klikoj anullo kthehem tek shporta per te vazhduar blerjet apo per te edituar   
+blerjet e bera.
+
+Per te ndaluar qe te shkojme tek fatura apo fatura-sukses nga url une krijoj nje guard 
+"ng g guard Purchase-Complete-Guard" . Kete guard e vendos tek imports[] tek app.module.ts.
+tek Purchase-Complete-Guard.ts kontrolloj nese ka produkte ne shporte, nese jo une navigoj /home, pa lejuar te shkojme 
+tek /fatura /fatura-sukses nga url.
+
+ // Check if purchase is complete
+    if (this.cartService.getCart().length>0) {
+      return true; 
+    } else {
+      this.router.navigate(['/']); 
+      return false; 
+    }
+  }
+Pra nese une kam elemente ne cart mund te vazhdoj me faturen, nese jo nuk vazhdoj dot dhe me kthen tek /home.
+Perditesoj app-routing-module.ts : {path:'fatura', component:FaturaComponent, canActivate: [PurchaseCompleteGuard]},
+                                   {path:'fatura-sukses', component:FaturaSuksesComponent, canActivate: [PurchaseCompleteGuard]}
+
