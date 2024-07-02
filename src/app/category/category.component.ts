@@ -91,7 +91,7 @@ export class CategoryComponent implements OnInit {
   removeFromCart(product: any) {
     this.cartService.removeFromCart(product);
   }
-
+  
   // total quantity of products in cart
   getTotalQuantity() {
     const cart = this.cartService.getCart();

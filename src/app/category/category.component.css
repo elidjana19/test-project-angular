@@ -42,7 +42,7 @@
   }
   
   .decrease, .increase {
-    background-color: #f00;
+    background-color: rgb(224, 75, 75);
     color: #fff;
     border: none;
     padding: 7px;
@@ -50,17 +50,27 @@
     cursor: pointer;
   }
   
-  .increase {
+  .increase{
     background-color: rgb(73, 99, 186);
   }
+
+  .decrease:hover{
+    background-color: red
+  }
+  .increase:hover{
+    background-color:  rgb(55, 70, 169);
+  }
+
 
   button{
     border:none;
     background-color: white;
   }
-  button:hover{
-    transform: scale(0.9);
-    transition: all 0.2s;
+
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
   }
 
 
