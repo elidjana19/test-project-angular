@@ -1,64 +1,101 @@
+.styled-button {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-h1 {
-    text-align: center;
-  }
-  
-  .cart-container {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 20px 0;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .product {
-    border-bottom: 1px solid #eee;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .product-data{
-    display:flex;
-    gap:15px;
-    width:100%;
-    
-  }
+.styled-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 
-  .product button{
-    padding:5px;
-    
-  }
-  
-  button{
-    border:none;
-    background-color: red;
-    color:white;
-    padding:10px;
-    border-radius:20px
-  }
+.styled-button.primary {
+  background: linear-gradient(45deg, #007bff, #0056b3);
+}
 
-  button:hover{
-    transform: scale(0.9);
-    transition: all 0.2s;
-  }
+.styled-button.primary:hover {
+  background: linear-gradient(45deg, #0056b3, #003f8a);
+}
 
-  .total-container{
-    display: flex;
-    justify-content: space-between;
-    border-top:1px solid black;
-    padding:20px 1px;
-  }
+.styled-button.danger {
+  background: linear-gradient(45deg, #dc3545, #c82333);
+}
 
-  .total-container-btns {
-    display:flex;
-   column-gap:5px;
-  }
-  .cart-btns{
-    display:flex;
-    justify-content: end;
-    gap:6px;
-  }
-  .cart-btns button{
-    background-color: blue;
-  }
+.styled-button.danger:hover {
+  background: linear-gradient(45deg, #c82333, #a71d2a);
+}
+
+.styled-button.success {
+  background: linear-gradient(45deg, #28a745, #218838);
+}
+
+.styled-button.success:hover {
+  background: linear-gradient(45deg, #218838, #1c7430);
+}
+
+.styled-button.warning {
+  background: linear-gradient(45deg, #ffc107, #e0a800);
+}
+
+.styled-button.warning:hover {
+  background: linear-gradient(45deg, #e0a800, #c69500);
+}
+
+.remove-button {
+  background-color: #dc3545;
+}
+
+.remove-button:hover {
+  background-color: #c82333;
+}
+
+.clear-button {
+  background-color: #6c757d;
+}
+
+.clear-button:hover {
+  background-color: #5a6268;
+}
+
+
+.product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.product-data {
+  flex: 1;
+}
+
+.cart-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.total-container {
+  margin-top: 20px;
+  padding-top: 10px;
+  text-align: right;
+}
+
+.total-container-btns {
+  margin-top: 10px;
+}
+
+.empty-cart {
+  font-size: 1.2em;
+  color: #555;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+

@@ -28,6 +28,11 @@ export class CartService {
     console.log(this.cart);
   }
 
+  removeTheProductTotally(product:any){
+    this.cart=this.cart.filter(item=> item.id !== product.id)
+    console.log(this.cart)
+  }
+
   incrementQuantity(id:number){
   let item= this.cart.find(i=> i.id === id)  //find the item with this id
   if(item){  

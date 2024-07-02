@@ -57,6 +57,11 @@ export class CardComponent implements OnInit {
    
   }
 
+  removeTheProductTotally(product:any){
+    this.cartService.removeTheProductTotally(product)
+    this.cart=this.cartService.getCart()
+  }
+
   clearCart() {
     this.cartService.clearCart();
     this.cart=[]
