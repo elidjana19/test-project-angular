@@ -17,7 +17,8 @@ import { PurchaseCompleteGuard } from './purchase-complete.guard';
 import { Fatura2Component } from './fatura2/fatura2.component';
 
 // for modal
-import { MatDialogModule } from '@angular/material';
+
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material';
 
 @NgModule({

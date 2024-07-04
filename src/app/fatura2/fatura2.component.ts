@@ -10,7 +10,7 @@ import { CartService } from '../services/cart-service';
 export class Fatura2Component implements OnInit {
 
   constructor(private cartService:CartService,
-    private dialogRef: MatDialogRef<Fatura2Component>
+    public dialogRef: MatDialogRef<Fatura2Component>
   ) {}
 
   cart:any
