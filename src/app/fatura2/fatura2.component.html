@@ -1,0 +1,17 @@
+<div id="container">
+    <h1 mat-dialog-title>Invoice</h1>
+<div mat-dialog-content>
+  <div *ngFor="let item of cart">
+    <div><strong>{{item.name}}</strong></div>
+    <div><strong>Quantity:</strong> {{ item.quantity }}</div>
+    <div><strong>Unit price:</strong> {{item.unitPrice}}$</div>
+    <div><strong>Price:</strong> {{item.quantity * item.unitPrice}}$</div>
+    <hr>
+  </div>
+  <div><strong></strong>$</div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button>Buy</button>
+</div>
+</div>
