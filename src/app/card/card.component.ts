@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 
 import { slideFromBottomAnimation } from '../animation';
 
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { Fatura2Component } from '../fatura2/fatura2.component';
+import { filter } from 'rxjs';
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -17,8 +21,11 @@ export class CardComponent implements OnInit {
   total:any=0
   totalProductsNumber:any=0
 
+  fileNameDialogRef!: MatDialogRef<Fatura2Component>;
+
   constructor(private cartService:CartService,
-    private router:Router
+    private router:Router,
+    public dialog:MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -31,6 +38,17 @@ export class CardComponent implements OnInit {
 
     console.log(this.cart + "cartttt")
     console.log(this.total)
+  }
+
+
+  openFatura() {
+    this.fileNameDialogRef = this.dialog.open(Fatura2Component);
+
+    this.fileNameDialogRef.afterClosed().pipe(
+      filter(name => name)
+    ).subscribe(name => {
+      console.log("hdhdhdhdhhd")
+    })
   }
 
 

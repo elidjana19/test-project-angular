@@ -14,7 +14,11 @@ import { RouterModule } from '@angular/router';
 
 import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { PurchaseCompleteGuard } from './purchase-complete.guard';
+import { Fatura2Component } from './fatura2/fatura2.component';
 
+// for modal
+import { MatDialogModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,7 @@ import { PurchaseCompleteGuard } from './purchase-complete.guard';
     CardComponent,
     FaturaSuksesComponent,
     FaturaComponent,
+    Fatura2Component,
  
 
   ],
@@ -33,7 +38,9 @@ import { PurchaseCompleteGuard } from './purchase-complete.guard';
     HttpClientModule,
     FormsModule,
     RouterModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule
    
   ],
   providers: [PurchaseCompleteGuard], //put guard here
