@@ -111,3 +111,35 @@ Pra nese une kam elemente ne cart mund te vazhdoj me faturen, nese jo nuk vazhdo
 Perditesoj app-routing-module.ts : {path:'fatura', component:FaturaComponent, canActivate: [PurchaseCompleteGuard]},
                                    {path:'fatura-sukses', component:FaturaSuksesComponent, canActivate: [PurchaseCompleteGuard]}
 
+
+
+Per te shfaqur karten me produktet e zgjedhura apo edhe mesazhin e suksesit te blerje mund te perdorim edhe modalet ne angular.
+Pra ne momentin qe klikoj ikonen e kartes une therras fuksionin openCardModal()  
+
+openCardModal() {
+   this.dialog.open(CardmodalComponent,{
+      disableClose: true,
+    })
+}
+Ku bej te mundur hapjen e CardModalComponent dhe me disableClose:true nuk lejoj mbylljen e saj nese klikohet jashte dialog qe do shfaqet.
+MatDialog e bej inject tek constructori.
+
+Ne momentin qe do e hap CardModal, me shfaqen produktet e shportes dhe butonat 
+per te vazhduar blerjet, per te finalizuar blerjen apo per ta anulluar ate.
+
+Ne momentin qe klikoj buy une duhet te hap modalin per fatura-sukses
+ku kam krijuar nje component me emrin fatura-sukses2.
+
+openFaturaSukses() {
+  
+   this.dialog.open(FaturaSukses2Component, {
+   panelClass: 'custom-dialog-container',
+   disableClose: true,
+  });
+  this.dialogRef.close();
+}
+
+Pra une hap FaturaSukses2 dhe i bej close modalit CardModal.
+
+FaturaSukses2 Modal me shfaq mesazhin e blerjes me sukses
+dhe ne mbyllje te saj une zbras shporten dhe kthej perdoruesin tek /home.

@@ -1,0 +1,14 @@
+.card {
+  border: none;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  justify-content: end;
+}
+button {
+  border: none;
+  color: purple;
+  background-color: white;
+  font-weight: bold;
+}

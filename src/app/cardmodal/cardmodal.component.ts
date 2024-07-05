@@ -8,25 +8,26 @@ import { slideFromBottomAnimation } from '../animation';
 import { filter } from 'rxjs/operators';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Fatura2Component } from '../fatura2/fatura2.component';
+import { FaturaSukses2Component } from '../fatura-sukses2/fatura-sukses2.component';
 
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css'],
-  animations: [slideFromBottomAnimation]
+  selector: 'app-cardmodal',
+  templateUrl: './cardmodal.component.html',
+  styleUrls: ['./cardmodal.component.css']
 })
-export class CardComponent implements OnInit {
-
+export class CardmodalComponent implements OnInit {
   cart:any[]=[]
   total:any=0
   totalProductsNumber:any=0
 
-  fileNameDialogRef!: MatDialogRef<Fatura2Component>;
+  fileNameDialogRef!: MatDialogRef<CardmodalComponent>;
 
   constructor(private cartService:CartService,
     private router:Router,
-    public dialog:MatDialog
+    public dialog:MatDialog, 
+    private dialogRef: MatDialogRef<CardmodalComponent>,
+    private faturaSuksesRef:MatDialogRef<FaturaSukses2Component>
   ) { }
 
   ngOnInit(): void {
@@ -34,25 +35,9 @@ export class CardComponent implements OnInit {
     this.cart=this.cartService.getCart()
     this.total=Number(this.cartService.totalPrice())
 
-
-  
-
     console.log(this.cart + "cartttt")
     console.log(this.total)
   }
-
-
-  openFatura() {
-    this.fileNameDialogRef = this.dialog.open(Fatura2Component);
-
-    this.fileNameDialogRef.afterClosed().pipe(
-      filter(name => name)
-    ).subscribe(name => {
-      console.log("hdhdhdhdhhd")
-    })
-  }
-
-
 
   incrementQuantity(id:number){
     this.cartService.incrementQuantity(id)
@@ -81,17 +66,30 @@ export class CardComponent implements OnInit {
     this.cart=this.cartService.getCart()
   }
 
+
+  // IS OK 
   clearCart() {
     this.cartService.clearCart();
     this.cart=[]
     this.totalProductsNumber=0
-    
+    this.dialogRef.close(); 
+}
+
+//IS OK
+continueBuying(){
+  this.router.navigate(['/home'])
+  this.dialogRef.close(); 
 }
 
 
-
-
-navigateToFatura(){
-  this.router.navigate(['/fatura'])
+openFaturaSukses() {
+  
+   this.dialog.open(FaturaSukses2Component, {
+   panelClass: 'custom-dialog-container',
+   disableClose: true,
+  });
+  this.dialogRef.close();
 }
+
+
 }
