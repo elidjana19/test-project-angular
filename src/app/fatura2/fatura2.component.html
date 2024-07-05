@@ -1,17 +1,15 @@
 <div id="container">
-    <h1 mat-dialog-title>Invoice</h1>
+  <div class=title>
+    <h1 mat-dialog-title>Fatura</h1>
+     {{totalPrice()}} ALL</div>
 <div mat-dialog-content>
-  <div *ngFor="let item of cart">
-    <div><strong>{{item.name}}</strong></div>
-    <div><strong>Quantity:</strong> {{ item.quantity }}</div>
-    <div><strong>Unit price:</strong> {{item.unitPrice}}$</div>
-    <div><strong>Price:</strong> {{item.quantity * item.unitPrice}}$</div>
-    <hr>
+  <div *ngFor="let item of cart" class="product">
+    <div><strong>{{item.name}}</strong>
+    <span>{{ item.quantity }} X {{item.unitPrice}}</span></div>
   </div>
-  <div><strong></strong>$</div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button >Cancel</button>
-  <button mat-button>Buy</button>
+<div mat-dialog-actions class="btns">
+  <button mat-button (click)="cancel()" class="cancel">Cancel</button>
+  <button mat-button (click)="buy()" class="buy">Buy</button>
 </div>
 </div>

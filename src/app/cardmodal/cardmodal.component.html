@@ -1,0 +1,39 @@
+<div class="container">
+<div mat-dialog-content>
+    <div class=title>
+        <button class="styled-button primary" (click)="continueBuying()">Continue buying</button>
+      </div>
+    <div *ngIf="cart.length > 0; else emptyCart" >
+        <div *ngFor="let item of cart" class="product" [@slideFromBottomAnimation]>
+          <div class="product-data">
+            <div><strong>{{item.name}}</strong></div>
+            <div><strong>Quantity:</strong> {{ item.quantity }}</div>
+            <div><strong>Unit price:</strong> {{item.unitPrice}}$</div>
+            <div><strong>Price:</strong> {{item.quantity*item.unitPrice}}$</div>
+          </div>
+          <div class="cart-btns">
+            <button class="styled-button primary" (click)="incrementQuantity(item.id)">+</button>
+            <button class="styled-button primary" (click)="decrementQuantity(item.id)">-</button>
+            <button class="styled-button danger" (click)="removeTheProductTotally(item)">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div mat-dialog-actions class="btns">
+    <strong>Total: {{total}} $</strong>
+    <div class="total-container-btns">
+      <button class="styled-button success" (click)="openFaturaSukses()" [disabled]="cart.length === 0">Buy</button>
+      <button class="styled-button warning" (click)="clearCart()" routerLink="home">Clear Cart</button>
+    </div>
+  </div>
+
+  <ng-template #emptyCart>
+    <strong>Your cart is empty.</strong>
+  </ng-template>
+
+
+ 
+
+</div>
+
+  

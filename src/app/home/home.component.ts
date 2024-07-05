@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { CartService } from '../services/cart-service';
+import { CardmodalComponent } from '../cardmodal/cardmodal.component';
+import { filter } from 'rxjs/operators';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-home',
@@ -17,18 +21,23 @@ export class HomeComponent implements OnInit {
   filteredCategories: any[] = [];
   searchString: any;
 
+
   constructor(
     private dataService: DataService,
-    private cartService: CartService
+    private cartService: CartService, 
+    public dialog:MatDialog
   ) {}
 
+
   ngOnInit(): void {
+
     // for initialization logic, such as fetching initial data
     //and setting up the component state.
 
     this.getCategories();
     this.initializeTheme();
   }
+
 
   getCategories() {
     this.dataService.getCategories().subscribe((data: any) => {
@@ -38,6 +47,7 @@ export class HomeComponent implements OnInit {
       this.filteredCategories = data; //to show all categories initially
     });
   }
+
 
   // theme switch
   switchTheme() {
@@ -82,5 +92,12 @@ export class HomeComponent implements OnInit {
       totalQuantity += item.quantity;
     });
     return totalQuantity;
+  }
+
+
+  openCardModal() {
+     this.dialog.open(CardmodalComponent,{
+      disableClose: true,
+    })
   }
 }

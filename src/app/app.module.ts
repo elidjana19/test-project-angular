@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CategoryComponent } from './category/category.component';
@@ -8,18 +8,21 @@ import { HomeComponent } from './home/home.component';
 import { CardComponent } from './card/card.component';
 import { FaturaSuksesComponent } from './fatura-sukses/fatura-sukses.component';
 import { FaturaComponent } from './fatura/fatura.component';
-// for ngModel
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; 
 import { RouterModule } from '@angular/router';
-
-import{BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { PurchaseCompleteGuard } from './purchase-complete.guard';
 import { Fatura2Component } from './fatura2/fatura2.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FaturaSukses2Component } from './fatura-sukses2/fatura-sukses2.component';
 
-// for modal
+import { HammerModule } from '@angular/platform-browser';
+import 'hammerjs';
+import { CardmodalComponent } from './cardmodal/cardmodal.component';
 
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -30,21 +33,23 @@ import { MatButtonModule } from '@angular/material';
     FaturaSuksesComponent,
     FaturaComponent,
     Fatura2Component,
- 
-
+    FaturaSukses2Component,
+    CardmodalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule, // Include FormsModule for ngModel
     RouterModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatButtonModule
-   
+    HammerModule
+    
+    
+
   ],
-  providers: [PurchaseCompleteGuard], //put guard here
+  providers: [PurchaseCompleteGuard, {provide: MatDialogRef, useValue: {}}, {provide: MAT_DIALOG_DATA, useValue: []}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

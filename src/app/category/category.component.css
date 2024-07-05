@@ -15,6 +15,7 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 3px;
+  
 }
 .product-card {
     display: flex;
@@ -24,7 +25,7 @@
     padding: 10px;
     border-radius: 10px;
     background-color: #fff;
-    margin-bottom:8px
+    margin-bottom:8px;
   }
   
   .product-info {
@@ -45,9 +46,11 @@
     background-color: rgb(224, 75, 75);
     color: #fff;
     border: none;
-    padding: 7px;
-    border-radius: 50%;
-    cursor: pointer;
+    width: 30px; 
+    height: 33px;
+    border-radius: 50%; 
+    cursor: pointer; 
+    font-size: 14px;
   }
   
   .increase{
@@ -93,7 +96,6 @@
 }
 
 
-/* pagination dots */
 .pagination {
   display: flex;
   gap: 5px;
@@ -109,4 +111,27 @@
 
 .dot.active {
   background-color: #6d6a6e;
+}
+
+
+
+
+
+.product-card {
+  /* Ensure sliding animation style */
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-card.ng-enter,
+.product-card.ng-leave {
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-card.ng-enter {
+  transform: translateX(-100%);
+}
+
+.product-card.ng-enter-active,
+.product-card.ng-leave-active {
+  transform: translateX(0%);
 }

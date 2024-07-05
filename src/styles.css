@@ -4,7 +4,6 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 
-
 body.dark-theme {
   background-color: black;
   color: #ffffff;
@@ -47,4 +46,17 @@ body.dark-theme .pagination-controls button {
 }
 body.dark-theme .close {
   background-color: white;
+}
+
+body.dark-theme .mat-dialog-container{
+  background-color: rgb(26, 26, 26);
+}
+
+body.dark-theme .mat-dialog-container .card{
+  background-color: rgb(26, 26, 26);
+  color:white
+}
+
+body.dark-theme .mat-dialog-container button{
+  background-color: rgb(26, 26, 26);
 }

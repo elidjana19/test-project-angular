@@ -1,14 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from '../services/cart-service';
+import { trigger, style, animate, transition } from '@angular/animations';
+import { CardmodalComponent } from '../cardmodal/cardmodal.component';
+import { filter } from 'rxjs/operators';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+
+
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('300ms ease-in-out', style({ transform: 'translateX(0%)' }))
+      ]),
+      transition(':leave', [
+        animate('300ms ease-in-out', style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
-export class CategoryComponent implements OnInit {
+
+export class CategoryComponent implements OnInit, AfterViewInit {
+
+
   products: any[] = [];
   categoryId: number | undefined;
   category: any;
@@ -18,14 +38,25 @@ export class CategoryComponent implements OnInit {
   currentPage: number = 0;
   pageSize: number = 6;
 
+
+  private touchStartX: number = 0;
+  private touchEndX: number = 0;
+  private touchThreshold: number = 50;
+
+  // fileNameDialogRef!: MatDialogRef<CardmodalComponent>;
+
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    private cartService: CartService
+    private cartService: CartService, 
+    public dialog:MatDialog
   ) {}
+ 
 
   ngOnInit(): void {
     this.updateCart();
+
+    
 
     //receive categoryID from route parameters and fetch the products
     // to show products of selected category
@@ -50,7 +81,40 @@ export class CategoryComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit(): void {
+  
+  }
+
+
+
   // Slider
+
+
+  onTouchStart(event: TouchEvent) {
+    console.log("Touch Start X:");
+  }
+
+  onTouchMove(event: TouchEvent) {
+    this.touchEndX = event.touches[0].clientX;
+    console.log("Touch End X:", this.touchEndX);
+
+  }
+
+  onTouchEnd(event: TouchEvent) {
+    const diff = this.touchStartX - this.touchEndX;
+    console.log("Touch Difference:", diff);
+    if (diff > this.touchThreshold) {
+      this.nextPage();
+    } else if (diff < -this.touchThreshold) {
+      this.previousPage();
+    }
+    this.touchStartX = 0;
+    this.touchEndX = 0;
+
+    console.log("start")
+  }
+
+
   get totalPages(): number {
     return Math.ceil(this.products.length / this.pageSize);
   }
@@ -64,9 +128,9 @@ export class CategoryComponent implements OnInit {
   nextPage() {
     if (this.currentPage < this.totalPages - 1) {
       this.currentPage++;
+    
     }
   }
-
   previousPage() {
     if (this.currentPage > 0) {
       this.currentPage--;
@@ -77,8 +141,10 @@ export class CategoryComponent implements OnInit {
     this.currentPage = page;
   }
 
-  // cart
 
+  
+  
+  // cart
   private updateCart() {
     this.products = this.cartService.getCart();
   }
@@ -101,5 +167,14 @@ export class CategoryComponent implements OnInit {
       totalQuantity += item.quantity;
     });
     return totalQuantity;
+  }
+
+
+
+
+  openCardModal() {
+    this.dialog.open(CardmodalComponent,{
+      disableClose: true,
+    })
   }
 }
